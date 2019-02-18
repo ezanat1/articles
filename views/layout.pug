@@ -1,0 +1,41 @@
+doctype html
+html
+    head
+        title #{title}
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet' href='/css/style.css')
+
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        a.navbar-brand(href='/') Articles
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+        #navbarNavAltMarkup.collapse.navbar-collapse
+        .navbar-nav
+            a.nav-item.nav-link.active(href='/')
+                | Home
+                span.sr-only (current)
+            if user
+                a.nav-item.nav-link(href='/articles/add') Add Article
+            if user
+                a.nav-item.nav-link(href='/users/logout') Logout
+            else
+                a.nav-item.nav-link(href='/users/register') Register
+                a.nav-item.nav-link(href='/users/login') Login
+
+
+
+    body
+    .container
+        != messages('message',locals)
+        if errors
+            each error, i in errors
+                div(class="alert alert-danger") #{error.msg}
+        block content
+        br
+        hr
+        footer
+            p copyrigth &copy 2019
+
+        script(src='/bower_components/jquery/dist/jquery.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='/js/main.js')
